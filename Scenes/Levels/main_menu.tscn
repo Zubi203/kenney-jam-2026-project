@@ -1,0 +1,291 @@
+[gd_scene format=3 uid="uid://dagbv0420hwcl"]
+
+[ext_resource type="Script" uid="uid://pte7oios0lt8" path="res://Scripts/main_menu.gd" id="1_28flt"]
+[ext_resource type="Theme" uid="uid://crw15lxffsuni" path="res://UI/ui_theme.tres" id="1_ggkx6"]
+[ext_resource type="FontFile" uid="uid://drusb3608fpam" path="res://UI/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="3_ggkx6"]
+[ext_resource type="Texture2D" uid="uid://4je7u0j53vnn" path="res://Art/blocks/Tiles/Rock/tile_0003.png" id="5_gnv55"]
+[ext_resource type="Texture2D" uid="uid://cx4dysi6caah7" path="res://Art/blocks/Tiles/Stone/tile_0003.png" id="5_wmo1h"]
+[ext_resource type="Texture2D" uid="uid://bp82qhkyr4smt" path="res://Art/blocks/Tiles/Rock/tile_0018.png" id="5_wnywc"]
+[ext_resource type="Texture2D" uid="uid://bh0vnp48g7dqt" path="res://Art/kenney_pixel-platformer/Tiles/tile_0026.png" id="6_6yab0"]
+[ext_resource type="Texture2D" uid="uid://cmulf87n5anbq" path="res://Art/blocks/Tiles/Sand/tile_0011.png" id="6_ch2lh"]
+[ext_resource type="Script" uid="uid://dtlvbbbtfkn53" path="res://Scripts/animated_button_component.gd" id="6_ggkx6"]
+[ext_resource type="Texture2D" uid="uid://dinkr5q2mqggr" path="res://Art/blocks/Tiles/Sand/tile_0003.png" id="6_w64ul"]
+[ext_resource type="Script" uid="uid://bno1ih8nt3utp" path="res://Scripts/button_audio_component.gd" id="6_wlsvp"]
+[ext_resource type="Texture2D" uid="uid://xb2ks12xnqnh" path="res://Art/blocks/Tiles/Rock/tile_0006.png" id="7_uwu3h"]
+[ext_resource type="Texture2D" uid="uid://y4etweh1hx75" path="res://Art/blocks/Tiles/Rock/tile_0000.png" id="7_w64ul"]
+[ext_resource type="Texture2D" uid="uid://dj8cscorlw3br" path="res://Art/blocks/Tiles/Stone/tile_0016.png" id="8_ggkx6"]
+[ext_resource type="Texture2D" uid="uid://cqadbb3f4c3na" path="res://Art/blocks/Tiles/Sand/tile_0018.png" id="9_wlsvp"]
+[ext_resource type="Texture2D" uid="uid://cu22271erq8v" path="res://Art/blocks/Tiles/Rock/tile_0013.png" id="10_rcukj"]
+
+[sub_resource type="Gradient" id="Gradient_ggkx6"]
+colors = PackedColorArray(0.0063911863, 0.019172812, 0.10016703, 1, 0.027757125, 0.073956974, 0.23677227, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_65ton"]
+gradient = SubResource("Gradient_ggkx6")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_h2w44"]
+font = ExtResource("3_ggkx6")
+font_size = 150
+font_color = Color(1, 0.01999998, 0.01999998, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_wlsvp"]
+font = ExtResource("3_ggkx6")
+font_size = 200
+font_color = Color(0.19966674, 1, 0.01999998, 1)
+outline_size = 20
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control" unique_id=2040673504]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_ggkx6")
+script = ExtResource("1_28flt")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=653821147]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_65ton")
+
+[node name="Background" type="ColorRect" parent="." unique_id=1322850296]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+color = Color(0.011764706, 0.03529412, 0.14901961, 1)
+
+[node name="UI" type="VBoxContainer" parent="." unique_id=827470934]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Title" type="CenterContainer" parent="UI" unique_id=550789349]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI/Title" unique_id=2065191636]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="UI/Title/HBoxContainer" unique_id=996576639]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Re"
+label_settings = SubResource("LabelSettings_h2w44")
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="UI/Title/HBoxContainer" unique_id=1182934629]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Scale"
+label_settings = SubResource("LabelSettings_wlsvp")
+vertical_alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=2098629271]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="UI/HBoxContainer" unique_id=178085332]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ButtonContainer" type="VBoxContainer" parent="UI/HBoxContainer" unique_id=497080935]
+custom_minimum_size = Vector2(200, 0)
+layout_mode = 2
+theme_override_constants/separation = 30
+
+[node name="PlayButton" type="Button" parent="UI/HBoxContainer/ButtonContainer" unique_id=779913065]
+custom_minimum_size = Vector2(220, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ggkx6")
+theme_override_font_sizes/font_size = 75
+text = "PLAY"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="UI/HBoxContainer/ButtonContainer/PlayButton" unique_id=1681602360]
+script = ExtResource("6_ggkx6")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="UI/HBoxContainer/ButtonContainer/PlayButton" unique_id=963205997]
+script = ExtResource("6_wlsvp")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="QuitButton" type="Button" parent="UI/HBoxContainer/ButtonContainer" unique_id=1764905223]
+custom_minimum_size = Vector2(220, 70)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("3_ggkx6")
+theme_override_font_sizes/font_size = 75
+text = "QUIT"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="UI/HBoxContainer/ButtonContainer/QuitButton" unique_id=882721335]
+script = ExtResource("6_ggkx6")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="UI/HBoxContainer/ButtonContainer/QuitButton" unique_id=1538271403]
+script = ExtResource("6_wlsvp")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="Padding2" type="Control" parent="UI/HBoxContainer" unique_id=235984276]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=889480277]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="Control" type="Control" parent="VBoxContainer" unique_id=1701842981]
+layout_mode = 2
+size_flags_vertical = 3
+mouse_filter = 2
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/Control" unique_id=486680473]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.00086805556
+anchor_top = 0.7138047
+anchor_right = 0.16753472
+anchor_bottom = 1.010101
+mouse_filter = 2
+texture = ExtResource("5_wnywc")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect5" type="TextureRect" parent="VBoxContainer/Control" unique_id=555413463]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8020833
+anchor_top = 0.6228956
+anchor_right = 1.0008681
+anchor_bottom = 1.0151515
+mouse_filter = 2
+texture = ExtResource("6_ch2lh")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect6" type="TextureRect" parent="VBoxContainer/Control" unique_id=2053295794]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8671875
+anchor_top = 0.36363637
+anchor_right = 1.0043403
+anchor_bottom = 0.7407407
+mouse_filter = 2
+texture = ExtResource("7_uwu3h")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect7" type="TextureRect" parent="VBoxContainer/Control" unique_id=884753880]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.8125
+anchor_top = 0.5151515
+anchor_right = 0.8715278
+anchor_bottom = 0.6228956
+mouse_filter = 2
+texture = ExtResource("8_ggkx6")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect8" type="TextureRect" parent="VBoxContainer/Control" unique_id=1367543046]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.921875
+anchor_top = 0.21212122
+anchor_right = 1.0008681
+anchor_bottom = 0.37878788
+mouse_filter = 2
+texture = ExtResource("9_wlsvp")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect9" type="TextureRect" parent="VBoxContainer/Control" unique_id=953894260]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.6892361
+anchor_top = 0.7895623
+anchor_right = 0.8020833
+anchor_bottom = 1.0404041
+mouse_filter = 2
+texture = ExtResource("10_rcukj")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect10" type="TextureRect" parent="VBoxContainer/Control" unique_id=1809511449]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5208333
+anchor_top = 0.94949496
+anchor_right = 0.5520833
+anchor_bottom = 1.0690236
+mouse_filter = 2
+texture = ExtResource("5_gnv55")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect2" type="TextureRect" parent="VBoxContainer/Control" unique_id=385351344]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.15190972
+anchor_top = 0.86195284
+anchor_right = 0.24913195
+anchor_bottom = 1.010101
+mouse_filter = 2
+texture = ExtResource("6_w64ul")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect3" type="TextureRect" parent="VBoxContainer/Control" unique_id=1337333011]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.5185185
+anchor_right = 0.13194445
+anchor_bottom = 0.7138048
+mouse_filter = 2
+texture = ExtResource("6_6yab0")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="TextureRect4" type="TextureRect" parent="VBoxContainer/Control" unique_id=1432517429]
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 0.42592594
+anchor_right = 0.067708336
+anchor_bottom = 0.5185186
+mouse_filter = 2
+texture = ExtResource("7_w64ul")
+stretch_mode = 4
+metadata/_edit_use_anchors_ = true
+
+[node name="NinePatchRect" type="NinePatchRect" parent="VBoxContainer" unique_id=1158459118]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+texture = ExtResource("5_wmo1h")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[connection signal="pressed" from="UI/HBoxContainer/ButtonContainer/PlayButton" to="." method="_on_play_button_pressed"]
+[connection signal="pressed" from="UI/HBoxContainer/ButtonContainer/QuitButton" to="." method="_on_quit_button_pressed"]

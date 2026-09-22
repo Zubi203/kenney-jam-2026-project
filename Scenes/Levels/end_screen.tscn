@@ -1,0 +1,136 @@
+[gd_scene format=3 uid="uid://codifnray26i5"]
+
+[ext_resource type="Theme" uid="uid://crw15lxffsuni" path="res://UI/ui_theme.tres" id="1_4fj4u"]
+[ext_resource type="Script" uid="uid://ojwnaadnrvyy" path="res://Scripts/end_screen.gd" id="1_skusg"]
+[ext_resource type="AudioStream" uid="uid://bbjnhpwtf24j" path="res://Audio/kenney_ui-audio/Audio/click2.ogg" id="2_6avg0"]
+[ext_resource type="FontFile" uid="uid://drusb3608fpam" path="res://UI/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="3_a3abs"]
+[ext_resource type="Script" uid="uid://dtlvbbbtfkn53" path="res://Scripts/animated_button_component.gd" id="5_c61cg"]
+[ext_resource type="Script" uid="uid://bno1ih8nt3utp" path="res://Scripts/button_audio_component.gd" id="6_15apk"]
+
+[sub_resource type="Gradient" id="Gradient_ggkx6"]
+colors = PackedColorArray(0.0063911863, 0.019172812, 0.10016703, 1, 0.027757125, 0.073956974, 0.23677227, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4fj4u"]
+gradient = SubResource("Gradient_ggkx6")
+fill_from = Vector2(0, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_7d2fg"]
+font = ExtResource("3_a3abs")
+font_size = 100
+shadow_size = 10
+shadow_color = Color(0, 0, 0, 1)
+
+[node name="EndScreen" type="Control" unique_id=474417704 node_paths=PackedStringArray("audio")]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_4fj4u")
+script = ExtResource("1_skusg")
+audio = NodePath("AudioStreamPlayer")
+click_sound = ExtResource("2_6avg0")
+
+[node name="TextureRect" type="TextureRect" parent="." unique_id=390035901]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_4fj4u")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="." unique_id=1416155760]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer" unique_id=1240252819]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="VBoxContainer/VBoxContainer" unique_id=237792557]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer/VBoxContainer" unique_id=2038169511]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Label" type="Label" parent="VBoxContainer/VBoxContainer/CenterContainer" unique_id=669930714]
+layout_mode = 2
+text = "Thank You for Playing!"
+label_settings = SubResource("LabelSettings_7d2fg")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer" unique_id=503167182]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=229396307]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/HBoxContainer" unique_id=1982166484]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=1350967701]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+theme_override_constants/separation = 20
+
+[node name="PlayAgainButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=920868732]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_a3abs")
+theme_override_font_sizes/font_size = 42
+text = "PLAY AGAIN"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/PlayAgainButton" unique_id=1719102899]
+script = ExtResource("5_c61cg")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/PlayAgainButton" unique_id=1016666257]
+script = ExtResource("6_15apk")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="ExitButton" type="Button" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer" unique_id=702143060]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("3_a3abs")
+theme_override_font_sizes/font_size = 42
+text = "QUIT"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ExitButton" unique_id=728005321]
+script = ExtResource("5_c61cg")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ExitButton" unique_id=1027233412]
+script = ExtResource("6_15apk")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="Padding" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=572962069]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding2" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=326874430]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding3" type="Control" parent="VBoxContainer/HBoxContainer/VBoxContainer" unique_id=506545823]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Padding2" type="Control" parent="VBoxContainer/HBoxContainer" unique_id=1578611611]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="." unique_id=2016357315]
+
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]

@@ -1,0 +1,233 @@
+[gd_scene format=3 uid="uid://bhschq6qbhr5a"]
+
+[ext_resource type="Script" uid="uid://coh8mpmelbqg" path="res://Scripts/player.gd" id="1_cvnsp"]
+[ext_resource type="Texture2D" uid="uid://blburhw724cox" path="res://Art/kenney_pixel-platformer/Tilemap/tilemap-characters.png" id="1_v0iea"]
+[ext_resource type="Texture2D" uid="uid://c3o2sm4dkpysk" path="res://Art/kenney_pixel-platformer/Tilemap/tilemap-characters_packed.png" id="2_cvnsp"]
+[ext_resource type="AudioStream" uid="uid://c23xq8smehlu8" path="res://Audio/impact_sounds/Audio/footstep_grass_000.ogg" id="2_gymyn"]
+[ext_resource type="AudioStream" uid="uid://ikohyqkdqmmy" path="res://Audio/impact_sounds/Audio/footstep_grass_001.ogg" id="3_pu2lt"]
+[ext_resource type="AudioStream" uid="uid://x68gle1tkegg" path="res://Audio/impact_sounds/Audio/footstep_grass_002.ogg" id="4_ukyrk"]
+[ext_resource type="Script" uid="uid://cgu53vj55af0v" path="res://Scripts/node_pool.gd" id="4_vgqql"]
+[ext_resource type="AudioStream" uid="uid://bqc0xqgv0fmwp" path="res://Audio/impact_sounds/Audio/footstep_grass_003.ogg" id="5_7dp3o"]
+[ext_resource type="PackedScene" uid="uid://bhpi2tswncub7" path="res://Scenes/shrink_ray_bullet.tscn" id="5_fkybt"]
+[ext_resource type="AudioStream" uid="uid://bbxhicbutros0" path="res://Audio/impact_sounds/Audio/footstep_grass_004.ogg" id="6_h4iuc"]
+[ext_resource type="AudioStream" uid="uid://dosksefrx5wso" path="res://Audio/sci_fi_sounds/Audio/laserSmall_000.ogg" id="7_fd4e3"]
+[ext_resource type="AudioStream" uid="uid://csni55h0liddv" path="res://Audio/sci_fi_sounds/Audio/laserSmall_001.ogg" id="8_qqcod"]
+[ext_resource type="AudioStream" uid="uid://cd70ggqbucgg0" path="res://Audio/sci_fi_sounds/Audio/laserSmall_002.ogg" id="9_igrcy"]
+[ext_resource type="AudioStream" uid="uid://bsjkoeiqkq6b2" path="res://Audio/sci_fi_sounds/Audio/laserSmall_003.ogg" id="10_fs7ks"]
+[ext_resource type="AudioStream" uid="uid://dtblcall8dgq5" path="res://Audio/sci_fi_sounds/Audio/laserSmall_004.ogg" id="11_l6n3p"]
+[ext_resource type="AudioStream" uid="uid://cwmxdl7x1qgey" path="res://Audio/sci_fi_sounds/Audio/explosionCrunch_000.ogg" id="12_qqcod"]
+[ext_resource type="AudioStream" uid="uid://d2l8bm525bsno" path="res://Audio/kenney_interface-sounds/Audio/drop_001.ogg" id="13_fs7ks"]
+[ext_resource type="AudioStream" uid="uid://b0dmmtfgvsywo" path="res://Audio/kenney_interface-sounds/Audio/minimize_003.ogg" id="14_l6n3p"]
+[ext_resource type="PackedScene" uid="uid://08e1hrxbvc5h" path="res://Scenes/player_death_particles.tscn" id="15_l6n3p"]
+[ext_resource type="Script" uid="uid://blajr6npbo3j5" path="res://Scripts/player_trail.gd" id="17_olqyp"]
+[ext_resource type="Texture2D" uid="uid://dx60pupn0sv1y" path="res://Art/platformer_industrial/Tilemap/tilemap.png" id="19_fs7ks"]
+
+[sub_resource type="Curve" id="Curve_olqyp"]
+_data = [Vector2(0, 0), 0.0, 1.039409, 0, 0, Vector2(1, 1), 0.86346686, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6t5aa"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vgqql"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fkybt"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(168, 0, 24, 24)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x3wgy"]
+atlas = ExtResource("2_cvnsp")
+region = Rect2(144, 0, 24, 24)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_3smsa"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6t5aa")
+}],
+"loop": 1,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vgqql")
+}],
+"loop": 1,
+"name": &"jump",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_fkybt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x3wgy")
+}],
+"loop": 1,
+"name": &"walk",
+"speed": 8.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_cvnsp"]
+radius = 7.0
+height = 14.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kbnuj"]
+size = Vector2(34, 25)
+
+[sub_resource type="Curve" id="Curve_fs7ks"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.8750045, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_65ton"]
+curve = SubResource("Curve_fs7ks")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 120.0
+initial_velocity_min = 20.0
+initial_velocity_max = 50.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.5
+scale_max = 1.5
+scale_curve = SubResource("CurveTexture_65ton")
+collision_mode = 2
+collision_use_scale = true
+
+[node name="Player" type="CharacterBody2D" unique_id=576433804 node_paths=PackedStringArray("coyote_timer", "jump_buffer_timer", "jump_particles", "bullet_pool", "interact_area", "foot_marker", "lifted_object_attach_point", "overhead_object_detector", "sprite", "shrink_ray", "pocket_sprite", "audio") groups=["Player"]]
+top_level = true
+collision_mask = 122
+script = ExtResource("1_cvnsp")
+move_speed = 200.0
+acceleration = 500.0
+braking = 1200.0
+coyote_time_duration = 0.1
+coyote_timer = NodePath("CoyoteTimer")
+jump_height = 70.0
+jump_time_to_peak = 0.4
+jump_time_to_descent = 0.3
+jump_buffer_duration = 0.1
+jump_buffer_timer = NodePath("JumpBuffer")
+jump_particles = NodePath("JumpParticles")
+shoot_rate = 0.1
+shrink_ray_offset = 10.0
+bullet_pool = NodePath("PlayerBulletPool")
+interact_area = NodePath("InteractRadius")
+foot_marker = NodePath("FootMarker")
+throw_direction = Vector2(1, -1)
+throw_force = 300.0
+lifted_object_attach_point = NodePath("LiftedItemAttachPoint")
+pocket_object_toss_force = 500
+overhead_object_detector = NodePath("OverheadRaycasts")
+sprite = NodePath("PlayerSprite")
+shrink_ray = NodePath("ShrinkRay")
+pocket_sprite = NodePath("PocketSprite")
+audio = NodePath("PlayerAudio")
+footstep_sounds = Array[AudioStream]([ExtResource("2_gymyn"), ExtResource("3_pu2lt"), ExtResource("4_ukyrk"), ExtResource("5_7dp3o"), ExtResource("6_h4iuc")])
+shoot_sounds = Array[AudioStream]([ExtResource("7_fd4e3"), ExtResource("8_qqcod"), ExtResource("9_igrcy"), ExtResource("10_fs7ks"), ExtResource("11_l6n3p")])
+footstep_interval = 0.3
+death_sound = ExtResource("12_qqcod")
+pickup_sound = ExtResource("13_fs7ks")
+throw_sound = ExtResource("14_l6n3p")
+death_particles = ExtResource("15_l6n3p")
+
+[node name="Trail" type="Line2D" parent="." unique_id=1971406662]
+show_behind_parent = true
+top_level = true
+width = 5.0
+width_curve = SubResource("Curve_olqyp")
+default_color = Color(1, 0.902, 0.51, 0.62352943)
+joint_mode = 1
+script = ExtResource("17_olqyp")
+
+[node name="PlayerSprite" type="AnimatedSprite2D" parent="." unique_id=984249129]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_3smsa")
+animation = &"walk"
+frame_progress = 0.25959525
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=427742033]
+position = Vector2(0, 4)
+shape = SubResource("CapsuleShape2D_cvnsp")
+
+[node name="ShrinkRay" type="Sprite2D" parent="." unique_id=1344522346]
+position = Vector2(-17, 4)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("1_v0iea")
+offset = Vector2(-1, -12)
+hframes = 9
+vframes = 3
+frame = 17
+
+[node name="PlayerBulletPool" type="Node" parent="." unique_id=555768411]
+script = ExtResource("4_vgqql")
+node_scene = ExtResource("5_fkybt")
+
+[node name="InteractRadius" type="Area2D" parent="." unique_id=148417094]
+collision_layer = 0
+collision_mask = 32
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractRadius" unique_id=1831122748]
+position = Vector2(0, 2.5)
+shape = SubResource("RectangleShape2D_kbnuj")
+
+[node name="LiftedItemAttachPoint" type="Marker2D" parent="." unique_id=968880138]
+position = Vector2(0, -28)
+
+[node name="FootMarker" type="Marker2D" parent="." unique_id=1141972333]
+position = Vector2(0, 11)
+
+[node name="PocketSprite" type="Sprite2D" parent="." unique_id=688408601]
+visible = false
+z_index = 1
+position = Vector2(6.9999995, 4)
+scale = Vector2(0.4, 0.4)
+texture = ExtResource("19_fs7ks")
+region_enabled = true
+region_rect = Rect2(267, 58, 16, 16)
+
+[node name="PlayerAudio" type="AudioStreamPlayer" parent="." unique_id=1744348496]
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="CoyoteTimer" type="Timer" parent="." unique_id=807967142]
+one_shot = true
+
+[node name="OverheadRaycasts" type="Node2D" parent="." unique_id=2124218024]
+
+[node name="RayCast2D" type="RayCast2D" parent="OverheadRaycasts" unique_id=2083869024]
+position = Vector2(0, -5)
+target_position = Vector2(0, -12)
+collision_mask = 32
+
+[node name="RayCast2D2" type="RayCast2D" parent="OverheadRaycasts" unique_id=590819893]
+position = Vector2(6, -5)
+target_position = Vector2(0, -12)
+collision_mask = 32
+
+[node name="RayCast2D3" type="RayCast2D" parent="OverheadRaycasts" unique_id=556097075]
+position = Vector2(-6, -5)
+target_position = Vector2(0, -12)
+collision_mask = 32
+
+[node name="JumpBuffer" type="Timer" parent="." unique_id=914570479]
+wait_time = 0.15
+one_shot = true
+
+[node name="JumpParticles" type="GPUParticles2D" parent="." unique_id=1928505635]
+position = Vector2(0, 9)
+emitting = false
+amount = 10
+lifetime = 0.5
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2w44")

@@ -1,0 +1,24 @@
+[gd_scene format=3 uid="uid://bhpi2tswncub7"]
+
+[ext_resource type="Script" uid="uid://dwme6at8btt10" path="res://Scripts/shrink_ray_bullet.gd" id="1_i5qvn"]
+[ext_resource type="Texture2D" uid="uid://c6lln3djwhm3t" path="res://Art/kenney_pixel-platformer/Tilemap/tilemap_packed.png" id="2_u7pwp"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mthkf"]
+size = Vector2(10, 2)
+
+[node name="ShrinkRayBullet" type="Area2D" unique_id=1513649207 node_paths=PackedStringArray("sprite")]
+collision_layer = 4
+collision_mask = 50
+script = ExtResource("1_i5qvn")
+speed = 700.0
+sprite = NodePath("Sprite2D")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1048455069]
+texture = ExtResource("2_u7pwp")
+region_enabled = true
+region_rect = Rect2(246, 128, 10, 2)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=861959266]
+shape = SubResource("RectangleShape2D_mthkf")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

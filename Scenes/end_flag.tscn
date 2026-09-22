@@ -1,0 +1,89 @@
+[gd_scene format=3 uid="uid://c44uhj0nlo2ca"]
+
+[ext_resource type="Script" uid="uid://5u5pd2vu40d6" path="res://Scripts/end_flag.gd" id="1_thwiu"]
+[ext_resource type="AudioStream" uid="uid://dx0j2uc34e2og" path="res://Audio/kenney_interface-sounds/Audio/confirmation_002.ogg" id="2_apwkr"]
+[ext_resource type="Texture2D" uid="uid://celx2x5kl6xd1" path="res://Art/kenney_pixel-platformer/Tilemap/tilemap.png" id="2_xlkuy"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_apwkr"]
+atlas = ExtResource("2_xlkuy")
+region = Rect2(209, 95, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bjvum"]
+atlas = ExtResource("2_xlkuy")
+region = Rect2(228, 95, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_f4tq0"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_apwkr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bjvum")
+}],
+"loop": 1,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_nli1k"]
+radius = 37.215588
+
+[sub_resource type="Gradient" id="Gradient_xlkuy"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.38495576, 0.7212389)
+colors = PackedColorArray(0.8, 0.152, 0.152, 1, 0.8, 0.5084, 0.152, 1, 0.8, 0.7244, 0.152, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_w8ggu"]
+gradient = SubResource("Gradient_xlkuy")
+
+[sub_resource type="Curve" id="Curve_apwkr"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.7734969, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_opoc8"]
+curve = SubResource("Curve_apwkr")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_bjvum"]
+resource_local_to_scene = true
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 200.0
+gravity = Vector3(0, 150, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_opoc8")
+color_initial_ramp = SubResource("GradientTexture1D_w8ggu")
+
+[node name="EndFlag" type="Area2D" unique_id=1278500590 node_paths=PackedStringArray("audio", "flag_particles")]
+collision_layer = 0
+script = ExtResource("1_thwiu")
+audio = NodePath("FlagAudio")
+end_flag_sound = ExtResource("2_apwkr")
+flag_particles = NodePath("FlagParticles")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1416590021]
+sprite_frames = SubResource("SpriteFrames_f4tq0")
+autoplay = "default"
+frame_progress = 0.2944323
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1196957180]
+shape = SubResource("CircleShape2D_nli1k")
+
+[node name="FlagAudio" type="AudioStreamPlayer" parent="." unique_id=1350240573]
+volume_db = -15.0
+pitch_scale = 0.9
+
+[node name="FlagParticles" type="GPUParticles2D" parent="." unique_id=1250892857]
+position = Vector2(-5, 32)
+emitting = false
+amount = 60
+one_shot = true
+explosiveness = 0.6
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_bjvum")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

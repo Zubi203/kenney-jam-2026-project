@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://b26qarn17c1k3"]
+
+[ext_resource type="Script" uid="uid://vojrblnc75ln" path="res://Scripts/camera_freeze_zone.gd" id="1_7s01i"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pwn3i"]
+size = Vector2(600, 300)
+
+[node name="CameraFreezeZone" type="Area2D" unique_id=1858369226 node_paths=PackedStringArray("camera_lock_point")]
+collision_layer = 0
+script = ExtResource("1_7s01i")
+camera_lock_point = NodePath("CameraLockPoint")
+
+[node name="Area" type="CollisionShape2D" parent="." unique_id=685964074]
+shape = SubResource("RectangleShape2D_pwn3i")
+debug_color = Color(0, 0.73, 0.2920001, 0.41960785)
+
+[node name="CameraLockPoint" type="Node2D" parent="." unique_id=1852671567]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

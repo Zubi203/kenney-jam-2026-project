@@ -1,0 +1,96 @@
+[gd_scene format=3 uid="uid://kuirlej1njt3"]
+
+[ext_resource type="TileSet" uid="uid://dse7ba3lj8cgh" path="res://Resources/level_terrain.tres" id="1_jjgbg"]
+[ext_resource type="PackedScene" uid="uid://bhschq6qbhr5a" path="res://Scenes/player.tscn" id="2_bo1nx"]
+[ext_resource type="Script" uid="uid://bawefqsulwwrq" path="res://Scripts/ui_manager.gd" id="5_21xkr"]
+[ext_resource type="Theme" uid="uid://crw15lxffsuni" path="res://UI/ui_theme.tres" id="5_irfg1"]
+[ext_resource type="FontFile" uid="uid://drusb3608fpam" path="res://UI/kenney_kenney-fonts/Fonts/Kenney Pixel.ttf" id="6_5sf7f"]
+[ext_resource type="Script" uid="uid://dirxenchsayyq" path="res://Scripts/camera_controller.gd" id="7_6bp64"]
+[ext_resource type="Script" uid="uid://dtlvbbbtfkn53" path="res://Scripts/animated_button_component.gd" id="7_irfg1"]
+[ext_resource type="Script" uid="uid://bno1ih8nt3utp" path="res://Scripts/button_audio_component.gd" id="8_5sf7f"]
+
+[node name="Main" type="Node2D" unique_id=1704563223]
+
+[node name="TileMapLayers" type="Node2D" parent="." unique_id=467963887]
+
+[node name="BGLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=772218296]
+
+[node name="DecorationLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=127916379]
+
+[node name="HazardLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=1439656114]
+tile_set = ExtResource("1_jjgbg")
+
+[node name="TerrainLayer" type="TileMapLayer" parent="TileMapLayers" unique_id=745354347]
+tile_set = ExtResource("1_jjgbg")
+
+[node name="Player" parent="." unique_id=576433804 instance=ExtResource("2_bo1nx")]
+position = Vector2(-20, 81)
+acceleration = 800.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=132022029]
+script = ExtResource("5_21xkr")
+
+[node name="ButtonContainer" type="HBoxContainer" parent="CanvasLayer" unique_id=295107768]
+anchors_preset = -1
+anchor_left = 0.75
+anchor_top = 0.05
+anchor_right = 0.95
+anchor_bottom = 0.15
+offset_left = 20.0
+offset_top = 0.5999985
+offset_right = 20.0
+offset_bottom = 0.5999985
+grow_horizontal = 0
+theme = ExtResource("5_irfg1")
+theme_override_constants/separation = 16
+alignment = 1
+
+[node name="ResetButton" type="Button" parent="CanvasLayer/ButtonContainer" unique_id=90422813]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_5sf7f")
+theme_override_font_sizes/font_size = 44
+text = "RESET"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="CanvasLayer/ButtonContainer/ResetButton" unique_id=218066143]
+script = ExtResource("7_irfg1")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="CanvasLayer/ButtonContainer/ResetButton" unique_id=1670598140]
+script = ExtResource("8_5sf7f")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="ExitButton" type="Button" parent="CanvasLayer/ButtonContainer" unique_id=1378400887]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_fonts/font = ExtResource("6_5sf7f")
+theme_override_font_sizes/font_size = 44
+text = "TITLE"
+
+[node name="AnimatedButtonComponent" type="Node2D" parent="CanvasLayer/ButtonContainer/ExitButton" unique_id=1577392643]
+script = ExtResource("7_irfg1")
+metadata/_custom_type_script = "uid://dtlvbbbtfkn53"
+
+[node name="ButtonAudioComponent" type="AudioStreamPlayer" parent="CanvasLayer/ButtonContainer/ExitButton" unique_id=1787059897]
+script = ExtResource("8_5sf7f")
+metadata/_custom_type_script = "uid://bno1ih8nt3utp"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="CanvasLayer" unique_id=1506425957]
+
+[node name="Camera" type="Camera2D" parent="." unique_id=1228160968]
+zoom = Vector2(1.8, 1.8)
+script = ExtResource("7_6bp64")
+follow_rate = 3.0
+
+[node name="CameraZones" type="Node2D" parent="." unique_id=966568689]
+
+[node name="Objects" type="Node2D" parent="." unique_id=90647137]
+
+[node name="Hazards" type="Node2D" parent="." unique_id=526587746]
+
+[node name="Checkpoints" type="Node2D" parent="." unique_id=1272910063]
+
+[node name="TutorialText" type="Node2D" parent="." unique_id=2103547503]
+
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/ResetButton" to="CanvasLayer" method="_on_reset_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/ButtonContainer/ExitButton" to="CanvasLayer" method="_on_exit_button_pressed"]

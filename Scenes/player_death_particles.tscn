@@ -1,0 +1,47 @@
+[gd_scene format=3 uid="uid://08e1hrxbvc5h"]
+
+[ext_resource type="Script" uid="uid://cc0wntsmbdlfj" path="res://Scripts/player_death_particles.gd" id="1_i57lu"]
+
+[sub_resource type="Gradient" id="Gradient_f6s8n"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.25221238, 0.5, 0.7743363)
+colors = PackedColorArray(0.95686275, 0.7058824, 0.105882354, 1, 0.45490196, 0.28235295, 0.30588236, 1, 1, 0.94509804, 0.54509807, 1, 0.9529412, 0.9764706, 0.9882353, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_f6s8n"]
+gradient = SubResource("Gradient_f6s8n")
+
+[sub_resource type="Curve" id="Curve_3jsy6"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.692859, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_i57lu"]
+curve = SubResource("Curve_3jsy6")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_b5aec"]
+particle_flag_disable_z = true
+emission_shape = 1
+emission_sphere_radius = 1.0
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+spread = 180.0
+initial_velocity_min = 100.0
+initial_velocity_max = 250.0
+gravity = Vector3(0, 50, 0)
+damping_min = 10.0
+damping_max = 15.000001
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_i57lu")
+color_initial_ramp = SubResource("GradientTexture1D_f6s8n")
+
+[node name="PlayerDeathParticles" type="GPUParticles2D" unique_id=1785844220]
+emitting = false
+amount = 50
+lifetime = 0.5
+one_shot = true
+explosiveness = 0.8
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_b5aec")
+script = ExtResource("1_i57lu")
+
+[connection signal="finished" from="." to="." method="_on_finished"]

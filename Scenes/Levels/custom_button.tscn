@@ -1,0 +1,43 @@
+[gd_scene format=3 uid="uid://bqyca20y18n5u"]
+
+[ext_resource type="FontFile" uid="uid://6fvuwkhhk5qa" path="res://UI/kenney_kenney-fonts/Fonts/Kenney Future Narrow.ttf" id="1_8iqdd"]
+[ext_resource type="Texture2D" uid="uid://bxn20l1usvncu" path="res://UI/UI_pack/Tiles/Large tiles/Thick outline/tile_0001.png" id="2_nogca"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_irfg1"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_tpkgp"]
+font = ExtResource("1_8iqdd")
+font_size = 20
+
+[node name="ResetButton" type="Button" unique_id=875500215]
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0.02, 0.0046, 0.0046, 1)
+theme_override_fonts/font = ExtResource("1_8iqdd")
+theme_override_font_sizes/font_size = 20
+theme_override_styles/normal = SubResource("StyleBoxEmpty_irfg1")
+text = "RESET"
+
+[node name="NinePatchRect" type="NinePatchRect" parent="." unique_id=184507354]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_nogca")
+patch_margin_left = 5
+patch_margin_top = 5
+patch_margin_right = 5
+patch_margin_bottom = 5
+
+[node name="Label" type="Label" parent="." unique_id=1938669990]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RESET"
+label_settings = SubResource("LabelSettings_tpkgp")
+horizontal_alignment = 1
+vertical_alignment = 1

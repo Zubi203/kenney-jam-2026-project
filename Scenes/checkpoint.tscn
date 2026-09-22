@@ -1,0 +1,95 @@
+[gd_scene format=3 uid="uid://ddmnxe16wt1x7"]
+
+[ext_resource type="Script" uid="uid://ga5q8pyf7e28" path="res://Scripts/checkpoint.gd" id="1_e75gc"]
+[ext_resource type="Texture2D" uid="uid://b27102m7vmg2n" path="res://Art/platformer_industrial/Tiles/tile_0065.png" id="2_i1pff"]
+[ext_resource type="AudioStream" uid="uid://dtx7f6vbfxm04" path="res://Audio/kenney_interface-sounds/Audio/confirmation_003.ogg" id="2_opoc8"]
+[ext_resource type="Texture2D" uid="uid://ktd3dei7bygf" path="res://Art/platformer_industrial/Tiles/tile_0064.png" id="3_opoc8"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l0c30"]
+atlas = ExtResource("2_i1pff")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_w8ggu"]
+atlas = ExtResource("3_opoc8")
+region = Rect2(0, 0, 18, 18)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_naa5w"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l0c30")
+}],
+"loop": 1,
+"name": &"active",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_w8ggu")
+}],
+"loop": 1,
+"name": &"inactive",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2ra75"]
+size = Vector2(20, 39)
+
+[sub_resource type="Gradient" id="Gradient_i1pff"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.3761062, 0.73893803)
+colors = PackedColorArray(0.07450981, 0.5529412, 0.7529412, 1, 0.16880098, 0.763283, 0.95602983, 1, 0.60436976, 0.8837942, 0.9974807, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_i1pff"]
+gradient = SubResource("Gradient_i1pff")
+
+[sub_resource type="Curve" id="Curve_opoc8"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.7734969, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_opoc8"]
+curve = SubResource("Curve_opoc8")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_i1pff"]
+particle_flag_disable_z = true
+angle_min = 1.0728835e-05
+angle_max = 90.000015
+direction = Vector3(0, -1, 0)
+spread = 20.0
+initial_velocity_min = 100.0
+initial_velocity_max = 150.0
+gravity = Vector3(0, 150, 0)
+scale_max = 3.0
+scale_curve = SubResource("CurveTexture_opoc8")
+color_initial_ramp = SubResource("GradientTexture1D_i1pff")
+
+[node name="Checkpoint" type="Area2D" unique_id=1398681626 node_paths=PackedStringArray("sprite", "audio", "particles")]
+collision_layer = 0
+script = ExtResource("1_e75gc")
+sprite = NodePath("Sprite2D")
+audio = NodePath("CheckpointAudio")
+checkpoint_audio = ExtResource("2_opoc8")
+particles = NodePath("CheckpointParticles")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="." unique_id=1029949897]
+sprite_frames = SubResource("SpriteFrames_naa5w")
+animation = &"inactive"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=659347578]
+position = Vector2(0, -9.5)
+shape = SubResource("RectangleShape2D_2ra75")
+
+[node name="CheckpointAudio" type="AudioStreamPlayer" parent="." unique_id=1393697572]
+volume_db = -20.0
+pitch_scale = 0.65
+
+[node name="CheckpointParticles" type="GPUParticles2D" parent="." unique_id=494399178]
+emitting = false
+amount = 40
+lifetime = 0.7
+one_shot = true
+explosiveness = 0.6
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_i1pff")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

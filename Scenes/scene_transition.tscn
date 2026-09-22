@@ -1,0 +1,117 @@
+[gd_scene format=3 uid="uid://wixa0oxy68m4"]
+
+[ext_resource type="Script" uid="uid://dmm74fjlbmc62" path="res://Scripts/scene_transition.gd" id="1_crfs3"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_xs6k6"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_crfs3"]
+bg_color = Color(0, 0, 0, 1)
+
+[sub_resource type="Animation" id="Animation_vin40"]
+length = 0.46666667
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:fill_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="Animation" id="Animation_8sxkv"]
+resource_name = "appear"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 10.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:fill_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [3]
+}
+
+[sub_resource type="Animation" id="Animation_sd3nk"]
+resource_name = "dissolve"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ProgressBar:value")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.39999998),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [10.0, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("ProgressBar:fill_mode")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [2]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_6nemr"]
+_data = {
+&"RESET": SubResource("Animation_vin40"),
+&"appear": SubResource("Animation_8sxkv"),
+&"dissolve": SubResource("Animation_sd3nk")
+}
+
+[node name="SceneTransition" type="CanvasLayer" unique_id=372004402 node_paths=PackedStringArray("animation_player")]
+layer = 2
+script = ExtResource("1_crfs3")
+animation_player = NodePath("AnimationPlayer")
+
+[node name="ProgressBar" type="ProgressBar" parent="." unique_id=242163369]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/background = SubResource("StyleBoxEmpty_xs6k6")
+theme_override_styles/fill = SubResource("StyleBoxFlat_crfs3")
+max_value = 10.0
+fill_mode = 2
+show_percentage = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1474534615]
+libraries/ = SubResource("AnimationLibrary_6nemr")

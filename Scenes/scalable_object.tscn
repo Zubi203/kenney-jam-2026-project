@@ -1,0 +1,122 @@
+[gd_scene format=3 uid="uid://bh3vv4ujdhm2x"]
+
+[ext_resource type="Script" uid="uid://dugvtwepxcch0" path="res://Scripts/scalable_object.gd" id="1_2l1u8"]
+[ext_resource type="AudioStream" uid="uid://68u10j5iorsf" path="res://Audio/kenney_interface-sounds/Audio/minimize_008.ogg" id="2_x8rbc"]
+[ext_resource type="AudioStream" uid="uid://ddwxkcwnugcyn" path="res://Audio/kenney_interface-sounds/Audio/drop_004.ogg" id="3_muq34"]
+[ext_resource type="Shader" uid="uid://cvxdb3724qhag" path="res://Scripts/scalable_object.gdshader" id="4_muq34"]
+[ext_resource type="Texture2D" uid="uid://dx60pupn0sv1y" path="res://Art/platformer_industrial/Tilemap/tilemap.png" id="4_x8rbc"]
+[ext_resource type="Script" uid="uid://blajr6npbo3j5" path="res://Scripts/player_trail.gd" id="6_i0gwn"]
+
+[sub_resource type="Curve" id="Curve_i0gwn"]
+_data = [Vector2(0, 0), 0.0, 1.1898497, 0, 0, Vector2(1, 1), 0.8289282, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d8okw"]
+resource_local_to_scene = true
+shader = ExtResource("4_muq34")
+shader_parameter/progress_red = 0.0
+shader_parameter/progress_green = 0.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2l1u8"]
+size = Vector2(18, 18)
+
+[sub_resource type="Gradient" id="Gradient_x8rbc"]
+colors = PackedColorArray(0.562827, 0.3117052, 0.2829067, 1, 0.8606809, 0.58751035, 0.46003628, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_xpw1u"]
+gradient = SubResource("Gradient_x8rbc")
+
+[sub_resource type="Curve" id="Curve_muq34"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -4.8311744, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_65ton"]
+curve = SubResource("Curve_muq34")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_h2w44"]
+lifetime_randomness = 1.0
+particle_flag_disable_z = true
+particle_flag_inherit_emitter_scale = true
+emission_shape_scale = Vector3(7.875, 0.96, 1)
+emission_shape = 3
+emission_box_extents = Vector3(1, 1, 1)
+direction = Vector3(0, -1, 0)
+spread = 101.887
+initial_velocity_min = 30.0
+initial_velocity_max = 40.0
+gravity = Vector3(0, 50, 0)
+scale_min = 0.5
+scale_max = 2.0
+scale_curve = SubResource("CurveTexture_65ton")
+color_initial_ramp = SubResource("GradientTexture1D_xpw1u")
+
+[node name="ScalableObject" type="CharacterBody2D" unique_id=1011559602 node_paths=PackedStringArray("collider", "sprite", "raycast_down", "raycast_up", "raycast_right", "raycast_left", "landing_particles", "audio") groups=["Object"]]
+collision_layer = 32
+collision_mask = 127
+script = ExtResource("1_2l1u8")
+scale_step = 0.5
+min_scale = 0.5
+collider = NodePath("CollisionShape2D")
+sprite = NodePath("Sprite2D")
+raycast_down = NodePath("Raycasts/RayCastDown")
+raycast_up = NodePath("Raycasts/RayCastUp")
+raycast_right = NodePath("Raycasts/RayCastRight")
+raycast_left = NodePath("Raycasts/RayCastLeft")
+landing_particles = NodePath("LandingParticles")
+audio = NodePath("ObjectAudio")
+shrink_sound = ExtResource("2_x8rbc")
+enlarge_sound = ExtResource("3_muq34")
+
+[node name="BoxTrail" type="Line2D" parent="." unique_id=1876675668]
+show_behind_parent = true
+top_level = true
+width = 3.0
+width_curve = SubResource("Curve_i0gwn")
+default_color = Color(0.57960004, 0.59984, 0.69, 0.6156863)
+joint_mode = 1
+script = ExtResource("6_i0gwn")
+trail_length = 50
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1580337463]
+z_index = 1
+material = SubResource("ShaderMaterial_d8okw")
+position = Vector2(-4.7683716e-07, 4.7683716e-07)
+scale = Vector2(1.125, 1.125)
+texture = ExtResource("4_x8rbc")
+region_enabled = true
+region_rect = Rect2(267, 58, 16, 16)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1967016472]
+shape = SubResource("RectangleShape2D_2l1u8")
+
+[node name="Raycasts" type="Node2D" parent="." unique_id=1431093785]
+
+[node name="RayCastDown" type="RayCast2D" parent="Raycasts" unique_id=442022817]
+target_position = Vector2(0, 13)
+collision_mask = 26
+
+[node name="RayCastUp" type="RayCast2D" parent="Raycasts" unique_id=817794628]
+target_position = Vector2(0, -13)
+collision_mask = 26
+
+[node name="RayCastLeft" type="RayCast2D" parent="Raycasts" unique_id=2014637665]
+target_position = Vector2(-13, 0)
+collision_mask = 26
+
+[node name="RayCastRight" type="RayCast2D" parent="Raycasts" unique_id=367095674]
+target_position = Vector2(13, 0)
+collision_mask = 26
+
+[node name="ObjectAudio" type="AudioStreamPlayer" parent="." unique_id=559203752]
+
+[node name="LandingParticles" type="GPUParticles2D" parent="." unique_id=171945279]
+position = Vector2(0, 9)
+emitting = false
+amount = 25
+lifetime = 0.7
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+process_material = SubResource("ParticleProcessMaterial_h2w44")
+
+[connection signal="visibility_changed" from="." to="." method="_on_visibility_changed"]
